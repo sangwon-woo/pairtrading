@@ -101,6 +101,7 @@ class QuotationAPI(UpbitMachine):
 
         # try - except
         res = rq.get(url, headers=self.headers).json()
+        time.sleep(0.12)
         
         return pd.DataFrame(res)
 

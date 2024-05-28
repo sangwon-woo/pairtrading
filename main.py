@@ -28,35 +28,41 @@ if __name__ == "__main__":
 
     krw_market_code = pd.read_csv("krw_market_code.csv")
     krw_market_code = krw_market_code['market'].to_list()
-    krw_btc = krw_market_code[0]
 
-    start_datetime = "2017-09-25 03:01:00"
-    unit_count = 200
 
-    total_df = pd.DataFrame()
+    for code in krw_market_code:
+        # krw_btc = krw_market_code[0]
 
-    total_df = pd.concat(
-        [total_df, uapi.get_minute_candle(
-            unit = 1,
-            market = krw_btc,
-            to = start_datetime,
-            count = unit_count
-        )]
-    )
-    print(total_df)
-    # cnt = 0
-    # next_datetime = start_datetime
+        start_datetime = "2024-05-28 00:00:00"
+        last_datetime = "2024-01-01 00:00:00"
+        unit_count = 200
 
-    # while cnt < 10:
-    #     next_datetime = str(to_datetime(next_datetime) - datetime.timedelta(minutes = unit_count))
-    #     total_df = pd.concat(
-    #         [total_df, uapi.get_minute_candle(
-    #             unit = 1,
-    #             market = krw_btc,
-    #             to = next_datetime,
-    #             count = unit_count
-    #         )]
-    #     )
-    #     cnt += 1
-    
+        total_df = pd.DataFrame()
+
+        total_df = pd.concat(
+            [total_df, uapi.get_minute_candle(
+                unit = 1,
+                market = code,
+                to = start_datetime,
+                count = unit_count
+            )]
+        )
+
+        next_datetime = start_datetime
+
+        while to_datetime(last_datetime) < to_datetime(next_datetime):
+            next_datetime = str(to_datetime(next_datetime) - datetime.timedelta(minutes = unit_count))
+            temp_df = uapi.get_minute_candle(
+                    unit = 1,
+                    market = code,
+                    to = next_datetime,
+                    count = unit_count
+                )
+            total_df = pd.concat(
+                [total_df, temp_df]
+            )
+            if temp_df.shape[0] < 200:
+                break
+
+        total_df.to_csv(f'/Volumes/E/data/upbit/{code}.csv', index=None)
     # print(total_df.info())
