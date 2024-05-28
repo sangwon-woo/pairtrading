@@ -101,8 +101,7 @@ class QuotationAPI(UpbitMachine):
 
         # try - except
         res = rq.get(url, headers=self.headers).json()
-        time.sleep(0.1)
-
+        
         return pd.DataFrame(res)
 
     def get_day_candle(self, market='KRW-BTC', to=None, count=1, converting_price_unit=None) -> pd.DataFrame:
