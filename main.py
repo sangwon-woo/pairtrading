@@ -1,8 +1,12 @@
-import os
+
 import datetime
 import time
 import pandas as pd
+from os import listdir
+from os.path import isfile, join
 from upbit import QuotationAPI
+
+database = '/Volumes/E/data/upbit'
 
 def to_datetime(str_datetime):
     _date, _time = str_datetime.split(' ')
@@ -29,8 +33,12 @@ if __name__ == "__main__":
     krw_market_code = pd.read_csv("krw_market_code.csv")
     krw_market_code = krw_market_code['market'].to_list()
 
-
+    exist_files = [f for f in listdir(database) if isfile(join(database, f))]
+    
     for code in krw_market_code:
+        if code + '.csv' in exist_files:
+            print(code+'.csv is already done')
+            continue    
         # krw_btc = krw_market_code[0]
 
         start_datetime = "2024-05-28 00:00:00"
@@ -65,4 +73,5 @@ if __name__ == "__main__":
                 break
 
         total_df.to_csv(f'/Volumes/E/data/upbit/{code}.csv', index=None)
+
     # print(total_df.info())
