@@ -41,8 +41,8 @@ if __name__ == "__main__":
             continue    
         # krw_btc = krw_market_code[0]
 
-        start_datetime = "2024-05-28 00:00:00"
-        last_datetime = "2024-01-01 00:00:00"
+        start_datetime = "2024-01-01 00:00:00"
+        last_datetime = "2023-01-01 00:00:00"
         unit_count = 200
 
         total_df = pd.DataFrame()
