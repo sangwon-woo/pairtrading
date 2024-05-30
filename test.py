@@ -91,13 +91,13 @@ def set_columns_dtypes(df):
 
     return df
 
-database = '.\\upbit'
+# database = '.\\upbit'
 
-price_data = [database+'\\'+f for f in listdir(database)]
-for _dir in price_data:
-    print(_dir, end=' ')
-    print(convert_bytes(getsize(_dir)), end='=> ')
-    tdf = pd.read_csv(_dir, encoding='utf-8')
-    tdf = set_columns_dtypes(tdf)
-    tdf.to_csv(_dir, index=None, encoding='utf-8')
-    print(convert_bytes(getsize(_dir)))
+# price_data = [database+'\\'+f for f in listdir(database)]
+# for _dir in price_data:
+#     print(_dir, end=' ')
+#     print(convert_bytes(getsize(_dir)), end='=> ')
+#     tdf = pd.read_csv(_dir, encoding='utf-8')
+#     tdf = set_columns_dtypes(tdf)
+#     tdf.to_csv(_dir, index=None, encoding='utf-8')
+#     print(convert_bytes(getsize(_dir)))
