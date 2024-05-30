@@ -67,7 +67,7 @@ if __name__ == "__main__":
                     count = unit_count
                 )
             total_df = pd.concat(
-                [total_df, temp_df]
+                [total_df, temp_df ]
             )
             if temp_df.shape[0] < 200:
                 break
