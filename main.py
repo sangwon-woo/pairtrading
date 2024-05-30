@@ -33,14 +33,15 @@ if __name__ == "__main__":
     krw_market_code = pd.read_csv("krw_market_code.csv")
     krw_market_code = krw_market_code['market'].to_list()
 
-    exist_files = [f for f in listdir(database) if isfile(join(database, f))]
+    # exist_files = [f for f in listdir(database) if isfile(join(database, f))]
     
     for code in krw_market_code:
-        if code + '.csv' in exist_files:
-            print(code+'.csv is already done')
-            continue    
+        # if code + '.csv' in exist_files:
+        #     print(code+'.csv is already done')
+        #     continue    
         # krw_btc = krw_market_code[0]
-
+        if code != 'KRW-AKT':
+            continue
         start_datetime = "2024-01-01 00:00:00"
         last_datetime = "2023-01-01 00:00:00"
         unit_count = 200
@@ -72,6 +73,6 @@ if __name__ == "__main__":
             if temp_df.shape[0] < 200:
                 break
 
-        total_df.to_csv(f'/Volumes/E/data/upbit/{code}.csv', index=None)
-
+        # total_df.to_csv(f'/Volumes/E/data/upbit/{code}.csv', index=None)
+        total_df.to_csv(f'{code}.csv', index=None)
     # print(total_df.info())
