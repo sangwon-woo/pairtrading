@@ -163,3 +163,6 @@ config/
 data/
 backup/
 *.virtual_documents
+*.DS_store
+*.pptx
+*.docx
