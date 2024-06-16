@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from os import listdir
+import os
 from os.path import getsize
 
 def convert_bytes(num):
@@ -70,7 +70,7 @@ def check_dtypes(df):
 def set_columns_dtypes(df):
     
     if df.columns[0] == '시장-코인':
-        dtypes = self.check_dtypes(df)
+        dtypes = check_dtypes(df)
         df = df.astype(dtypes)
         return df
 
@@ -91,9 +91,11 @@ def set_columns_dtypes(df):
 
     return df
 
-# database = '.\\upbit'
+# database = os.getcwd() + '/data2/'
+# print(database)
 
-# price_data = [database+'\\'+f for f in listdir(database)]
+# price_data = [database + f for f in os.listdir(database)]
+# print(price_data)
 # for _dir in price_data:
 #     print(_dir, end=' ')
 #     print(convert_bytes(getsize(_dir)), end='=> ')
